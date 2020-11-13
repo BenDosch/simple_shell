@@ -9,6 +9,11 @@ char **sherlock(char *str, const char *delim)
 	char **words;
 	for (i = 0; str[i]; i++)
 	{
+		if (str[i] == '\n')
+		{
+			str[i] = '\0';
+			break;
+		}
 		for (j = 0; str[i + j] == delim[j] || delim[j] == '\0'; j++)
 		{
 			if (delim[j] == '\0')

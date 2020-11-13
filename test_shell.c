@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	int fb = 0, status;
+	int fb = 0, status, i;
 	char *buffer;
 	size_t bufsize = 1024;
 	pid_t child;
@@ -13,13 +13,13 @@ int main(void)
 		printf("Error, could not allocate memory for buffer\n");
 		exit(1);
 	}
-	printf("$ ");
 
+	printf("$ ");
 	while (fb != 1)
 	{
 
-		getline(&buffer, &bufsize, stdin);
-		char commands[] = sherlock(buffer, " ");
+		fb = getline(&buffer, &bufsize, stdin);
+		char **commands = sherlock(buffer, " ");
 		child = fork();
 		if (child == -1)
 		{
@@ -29,7 +29,6 @@ int main(void)
 		else if (child == 0)
 		{
 			execve(commands[0], commands, NULL);
-			sleep(3);
 		}
 		else
 		{
