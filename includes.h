@@ -10,6 +10,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <signal.h>
 #include "prototype.h"
 
 #endif /* InCLUDES_H */
