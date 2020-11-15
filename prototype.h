@@ -22,5 +22,6 @@ void free_d_ptr(char **ptr);
 int count_delim(char *str, const char *delim);
 int (*runcommand(char **commands, char *buffer))(char **, char *);
 char *_getenv(const char *name);
+char *get_file_path(char *filename);
 
 #endif /* PROTOYPE_H */
