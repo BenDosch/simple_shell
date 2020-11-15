@@ -1,9 +1,9 @@
 #include "includes.h"
 
 /**
- * get_file_path - get full file path of
- * @filename: filename to check for full path of
- * Return: full path of file name
+ * get_file_path - get directory from PATH if it contains a file
+ * @filename: filename to check for full path
+ * Return: path that contains the named file, on fail returns NULL
  */
 
 char *get_file_path(char *filename)
@@ -12,6 +12,7 @@ char *get_file_path(char *filename)
 	struct dirent *dint;
 	int i, status;
 	char **paths = sherlock(_getenv("PATH"));
+	char *path;
 
 	for(i = 0; paths[i], i++)
 	{
@@ -22,14 +23,14 @@ char *get_file_path(char *filename)
 				continue;
 			else if (_strcmp(dint->d_name, filename) == 0)
 			{
-				filename = _strcat(dint->dname, filename); /*maybe have a temp then change it after checks*/
-				if (filename == NULL)
+				path = _strcpy(dint->d_name) /* make a _strcpy */
+				if (path == NULL)
 				{
 					/* error */
 				}
 				close(directory);
 				free_d_ptr(paths)
-				return (filename);
+				return (path);
 			}
 		}
 		close(directory);
