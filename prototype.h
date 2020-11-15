@@ -18,6 +18,9 @@ int _strcmp(char *s1, char *s2);
 bi_t *load_builtins(void);
 void free_d_ptr(char **ptr);
 char **sherlock(char *str, const char *delim);
+void free_d_ptr(char **ptr);
+int count_delim(char *str, const char *delim);
 int (*runcommand(char **commands, char *buffer))(char **, char *);
+char *_getenv(const char *name);
 
 #endif /* PROTOYPE_H */

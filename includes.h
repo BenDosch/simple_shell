@@ -12,5 +12,9 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include "prototype.h"
+#include "builtin1.c"
+#include "builtin2.c"
+#include "strings.c"
+#include "sherlock.c"
 
 #endif /* InCLUDES_H */

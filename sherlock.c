@@ -1,34 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "includes.h"
 
-void free_d_ptr(char **ptr);
+
+/**
+ * sherlock - Seperates input into seprate words using a delmiter and removes \n
+ * @str: Input sent to shell
+ * @delim: Delimiter to use to seperate commands and arguments
+ * Return: pointer to pointers of the words found.
+ */
 
 char **sherlock(char *str, const char *delim)
 {
 	unsigned int i, j, k, end = 0, word = 0, mark = 0, dnum = 0;
 	char **words;
-	for (i = 0; str[i]; i++)
-	{
-		if (str[i] == '\n')
-		{
-			str[i] = '\0';
-			break;
-		}
-		for (j = 0; str[i + j] == delim[j] || delim[j] == '\0'; j++)
-		{
-			if (delim[j] == '\0')
-			{
-				dnum++;
-				i += j - 1;
-				break;
-			}
-		}
-	}
+
+	dnum = count_delim(str, delim);
 	words = malloc(sizeof(char*) * (dnum + 2));
 	words[dnum + 1] = '\0';
 	if (words == NULL)
 		return (NULL);
-
 	for (i = 0; str[i]; i++)
 	{
 		for (j = 0; str[i + j] == delim[j] || delim[j] == '\0' || str[i + 1] == '\0'; j++)
@@ -53,10 +42,7 @@ char **sherlock(char *str, const char *delim)
 					else
 						(words[word][k]) = str[mark + k];
 				}
-				word++;
-				mark = i + j;
-				i += j - 1;
-				break;
+				word++; mark = i + j; i += j - 1; break;
 			}
 		}
 		if (end == 1)
@@ -64,6 +50,12 @@ char **sherlock(char *str, const char *delim)
 	}
 	return (words);
 }
+
+/**
+ * free_d_ptr - free's a double pointer
+ * @ptr: Double pointer to free
+ * Return: none
+ */
 
 void free_d_ptr(char **ptr)
 {
@@ -74,4 +66,37 @@ void free_d_ptr(char **ptr)
 		i++;
 	}
 	free(ptr);
+}
+
+
+/**
+ * count_delim - counts the number of delmimters found in a string
+ * when it hits a newline, it replaces it with \0 and ends
+ * @str: string to check
+ * @delim: delimiter to check for
+ * Return: number of delimitres found in string
+ */
+
+int count_delim(char *str, const char *delim)
+{
+	int i, j, dnum = 0;
+
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] == '\n')
+		{
+			str[i] = '\0';
+			break;
+		}
+		for (j = 0; str[i + j] == delim[j] || delim[j] == '\0'; j++)
+		{
+			if (delim[j] == '\0')
+			{
+				dnum++;
+				i += j - 1;
+				break;
+			}
+		}
+	}
+	return (dnum);
 }

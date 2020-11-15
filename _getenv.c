@@ -1,5 +1,11 @@
 #include "includes.h"
 
+/**
+ * _getenv - gets the environmental vairable's value
+ * @name: Name of environmental varialble to access
+ * Return: pointer to environmental variable value
+ */
+
 
 char *_getenv(const char *name)
 {
@@ -17,6 +23,7 @@ char *_getenv(const char *name)
 				break;
 		}
 	}
+	return (NULL);
 }
 
 /* int main(int ac, char **av, char **env)

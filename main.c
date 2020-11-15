@@ -95,6 +95,7 @@ int main(int ac, char **av, char **env)
 		(*runcommand(commands, buffer))(commands, buffer);
 	}
 	free(buffer);
-/* Need to make a free sherlock function */
+/* Need to make a free sherlock function ::: I'm possitive free_d_ptr is it */
+	free_d_ptr(commands);
 	return (0);
 }
