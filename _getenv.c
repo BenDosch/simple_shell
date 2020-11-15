@@ -19,8 +19,8 @@ char *_getenv(const char *name)
 	}
 }
 
-int main(int ac, char **av, char **env)
+/* int main(int ac, char **av, char **env)
 {
 	printf("Pointer %p\n", _getenv(av[1]));
 	printf("Value: %s\n", _getenv(av[1]));
-}
+	} */
