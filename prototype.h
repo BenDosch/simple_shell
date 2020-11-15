@@ -15,6 +15,8 @@ typedef struct bi{
 
 int sl_exit(char **commands, char *buffer);
 int _strcmp(char *s1, char *s2);
+size_t _strlen(char *str);
+char *_strcat(char *start, char *end);
 bi_t *load_builtins(void);
 void free_d_ptr(char **ptr);
 char **sherlock(char *str, const char *delim);
