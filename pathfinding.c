@@ -23,7 +23,7 @@ char *get_file_path(char *filename)
 			else if (_strcmp(dint->d_name, filename) == 0)
 			{
 				filename = _strcat(dint->dname, filename); /*maybe have a temp then change it after checks*/
-				if (filename == /*_strcmp fail*/)
+				if (filename == NULL)
 				{
 					/* error */
 				}
