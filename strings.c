@@ -57,7 +57,7 @@ size_t _strlen(char *str)
 {
 	size_t i = 0;
 
-	whlie(str[i])
+	while (str[i])
 	{
 		i++;
 	}
