@@ -34,7 +34,7 @@ char *_strcat(char *start, char *end)
 			   return (NULL);
 	for (i = 0; start[i] != '\0'; i++)
 	{
-		temp[i] = start[i]
+		temp[i] = start[i];
 	}
 	for (j = 0; end[j] != '\0'; j++)
 	{

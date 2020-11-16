@@ -10,9 +10,8 @@ char *get_file_path(char *filename)
 {
 	DIR *directory;
 	struct dirent *dint;
-	int i, status;
+	int i;
 	char **paths = sherlock(_getenv("PATH"));
-	char *path;
 
 	for(i = 0; paths[i], i++)
 	{
@@ -23,14 +22,14 @@ char *get_file_path(char *filename)
 				continue;
 			else if (_strcmp(dint->d_name, filename) == 0)
 			{
-				path = _strcpy(dint->d_name) /* make a _strcpy */
-				if (path == NULL)
+				filename = _strcat(dint->dname, filename); /*maybe have a temp then change it after checks*/
+				if (filename == NULL)
 				{
-					/* error */
+					/* error could not concatonate*/
 				}
 				close(directory);
 				free_d_ptr(paths)
-				return (path);
+				return (filename);
 			}
 		}
 		close(directory);
