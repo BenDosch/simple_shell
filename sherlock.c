@@ -2,7 +2,8 @@
 
 
 /**
- * sherlock - Seperates input into seprate words using a delmiter and removes \n
+ * sherlock - Seperates input into seprate words using a
+ * delmiter and removes \n
  * @str: Input sent to shell
  * @delim: Delimiter to use to seperate commands and arguments
  * Return: pointer to pointers of the words found.
@@ -10,17 +11,18 @@
 
 char **sherlock(char *str, const char *delim)
 {
-	unsigned int i, j, k, end = 0, word = 0, mark = 0, dnum = 0;
+	unsigned int i, j, end = 0, word = 0, mark = 0, dnum = 0;
 	char **words;
 
 	dnum = count_delim(str, delim);
-	words = malloc(sizeof(char*) * (dnum + 2));
+	words = malloc(sizeof(char *) * (dnum + 2));
 	words[dnum + 1] = '\0';
 	if (words == NULL)
 		return (NULL);
 	for (i = 0; str[i]; i++)
 	{
-		for (j = 0; str[i + j] == delim[j] || delim[j] == '\0' || str[i + 1] == '\0'; j++)
+		for (j = 0; str[i + j] == delim[j] || delim[j] == '\0'
+			     || str[i + 1] == '\0'; j++)
 		{
 			if (str[i + 1] == '\0')
 			{
@@ -57,6 +59,7 @@ char **sherlock(char *str, const char *delim)
 void free_d_ptr(char **ptr)
 {
 	int i = 0;
+
 	while (ptr[i])
 	{
 		free(ptr[i]);
@@ -113,7 +116,8 @@ int count_delim(char *str, const char *delim)
 void set_word(char *str, char **words, unsigned int word, unsigned int mark,
 	     unsigned int i)
 {
-	int k = 0;
+	unsigned int k = 0;
+
 	for (k = 0; k <= (i - mark); k++)
 	{
 		if (k == (i - mark))
