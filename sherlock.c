@@ -35,14 +35,11 @@ char **sherlock(char *str, const char *delim)
 					free_d_ptr(words);
 					return (NULL);
 				}
-				for (k = 0; k <= (i - mark); k++)
-				{
-					if (k == (i - mark))
-						(words[word][k]) = '\0';
-					else
-						(words[word][k]) = str[mark + k];
-				}
-				word++; mark = i + j; i += j - 1; break;
+				set_word(str, words, word, mark, i);
+				word++;
+				mark = i + j;
+				i += j - 1;
+				break;
 			}
 		}
 		if (end == 1)
@@ -99,4 +96,29 @@ int count_delim(char *str, const char *delim)
 		}
 	}
 	return (dnum);
+}
+
+/**
+ * set_word - loops through a string from mark to i and assigns that value to a
+ * char pointer in an array of char pointers
+ * @str: String to loop through
+ * @words: Array of char pointers
+ * @word: Element of array to set
+ * @mark: Starting point in string
+ * @i: Ending point in string
+ * Return: none
+ */
+
+
+void set_word(char *str, char **words, unsigned int word, unsigned int mark,
+	     unsigned int i)
+{
+	int k = 0;
+	for (k = 0; k <= (i - mark); k++)
+	{
+		if (k == (i - mark))
+			(words[word][k]) = '\0';
+		else
+			(words[word][k]) = str[mark + k];
+	}
 }
