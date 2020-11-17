@@ -61,4 +61,5 @@ size_t _strlen(char *str)
 	{
 		i++;
 	}
+	return(i);
 }

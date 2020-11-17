@@ -1,5 +1,3 @@
-#include "includes.h"
-
 /**
  * get_file_path - get directory from PATH if it contains a file
  * @filename: filename to check for full path
@@ -11,28 +9,38 @@ char *get_file_path(char *filename)
 	DIR *directory;
 	struct dirent *dint;
 	int i;
-	char **paths = sherlock(_getenv("PATH"));
+	char colen = ':';
+	const char *delim = &colen;
+	char **paths = sherlock(_getenv("PATH"), delim);
 
-	for(i = 0; paths[i], i++)
+	for(i = 0; paths[i]; i++)
 	{
-		directory = open(paths[i]);
-		while(dint = readdir(directory))
+		printf("%s\n", paths[i]);
+
+		directory = opendir(paths[i]);
+		while((dint = readdir(directory)))
 		{
-			if (_strcmp(dint->d_name, '.') == 0 || _strcmp(dint->d_name, '..') == 0)
-				continue;
-			else if (_strcmp(dint->d_name, filename) == 0)
+			if (_strcmp(dint->d_name, ".") == 0
+			    || _strcmp(dint->d_name, "..") == 0)
 			{
-				filename = _strcat(dint->dname, filename); /*maybe have a temp then change it after checks*/
+				printf("Was . or ..\n");
+				continue;
+			}
+			else if (strcmp(dint->d_name, filename) == 0)
+			{
+				filename = _strcat(dint->d_name, filename); /*maybe have a temp then change it after checks*/
 				if (filename == NULL)
 				{
-					/* error could not concatonate*/
+					printf("error could not concatonate\n");
 				}
-				close(directory);
-				free_d_ptr(paths)
+				printf("Filename is now now: %s", filename);
+				closedir(directory);
+				free_d_ptr(paths);
 				return (filename);
 			}
 		}
-		close(directory);
+		printf("Filename not in directory\n");
+		closedir(directory);
 	}
 	free_d_ptr(paths);
 	return (NULL);

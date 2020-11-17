@@ -11,10 +11,13 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <signal.h>
+#include <dirent.h>
 #include "prototype.h"
 #include "builtin1.c"
 #include "builtin2.c"
 #include "strings.c"
 #include "sherlock.c"
+#include "pathfinding.c"
+#include "_getenv.c"
 
 #endif /* InCLUDES_H */
