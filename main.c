@@ -32,7 +32,10 @@ int runexe(char **commands)
 		{       write(1, "Fork Failed\n", 12);
 			return (1);             }
 		else if (child == 0)
+		{
+			get_file_path(commands[0]);
 			execve(commands[0], commands, NULL);
+		}
 		else
 			wait(&status);  }
 	return (0);

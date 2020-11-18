@@ -13,7 +13,7 @@ char *get_file_path(char *filename)
 	const char *delim = &colen;
 	char **paths = sherlock(_getenv("PATH"), delim);
 
-	printf("File name is: %s", filename);
+	printf("File name is: %s\n", filename);
 	for(i = 0; paths[i]; i++)
 	{
 		printf("%s\n", paths[i]);
