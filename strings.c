@@ -29,13 +29,15 @@ char *_strcat(char *start, char *end)
 	size_t i, j;
 	char *temp, *oldstart;
 
-	temp = malloc(sizeof(char) * (_strlen(start) +_strlen(end) + 1));
+	temp = malloc(sizeof(char) * (_strlen(start) +_strlen(end) + 2));
 	if (temp == NULL)
 			   return (NULL);
 	for (i = 0; start[i] != '\0'; i++)
 	{
 		temp[i] = start[i];
 	}
+	temp[i] = '/';
+	i++;
 	for (j = 0; end[j] != '\0'; j++)
 	{
 		temp[i + j] = end[j];

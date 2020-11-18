@@ -13,6 +13,7 @@ char *get_file_path(char *filename)
 	const char *delim = &colen;
 	char **paths = sherlock(_getenv("PATH"), delim);
 
+	printf("File name is: %s", filename);
 	for(i = 0; paths[i]; i++)
 	{
 		printf("%s\n", paths[i]);
@@ -28,12 +29,12 @@ char *get_file_path(char *filename)
 			}
 			else if (strcmp(dint->d_name, filename) == 0)
 			{
-				filename = _strcat(dint->d_name, filename); /*maybe have a temp then change it after checks*/
+				filename = _strcat(paths[i], filename); /*maybe have a temp then change it after checks*/
 				if (filename == NULL)
 				{
 					printf("error could not concatonate\n");
 				}
-				printf("Filename is now now: %s", filename);
+				printf("Filename is now now: %s\n", filename);
 				closedir(directory);
 				free_d_ptr(paths);
 				return (filename);
