@@ -18,35 +18,38 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * *_strcat - Concatenates src to dest and changes dest to point to the result
- * @start: String to be added to start of new string
- * @end: String to add at the end of new string
- * Return: Pointer to new location in memory conatinging the concatonated dest
+ * *dircat - Concatenates dir + / + file and changes the pointer of file to
+ * the new location in memory after freeing what file pointed to.
+ * @dir: directory that contains file
+ * @file: name of file
+ * Return: 1 on sucess, 0 on fail.
  */
 
-char *_strcat(char *start, char *end)
+char *dircat(char *dir, char *file)
 {
 	size_t i, j;
-	char *temp, *oldstart;
+	char *temp;
 
-	temp = malloc(sizeof(char) * (_strlen(start) +_strlen(end) + 2));
+	temp = malloc(sizeof(char) * (_strlen(dir) +_strlen(file) + 2));
 	if (temp == NULL)
-			   return (NULL);
-	for (i = 0; start[i] != '\0'; i++)
+		   return (NULL);
+	for (i = 0; dir[i] != '\0'; i++)
 	{
-		temp[i] = start[i];
+		temp[i] = dir[i];
 	}
 	temp[i] = '/';
 	i++;
-	for (j = 0; end[j] != '\0'; j++)
+	for (j = 0; file[j] != '\0'; j++)
 	{
-		temp[i + j] = end[j];
+		temp[i + j] = file[j];
 	}
 	temp[i + j] = '\0';
-	oldstart = start;
-	start = temp;
-	free(oldstart);
-	return (start);
+	printf("filename: %s\n", file);
+	printf("dirname: %s\n", dir);
+	printf("temp: %s\n", temp);
+	file = temp;
+	printf("file now: %s\n", file);
+	return (temp);
 }
 
 /**
