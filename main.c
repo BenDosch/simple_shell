@@ -23,8 +23,12 @@ int runexe(char **commands)
 	pid_t child;
 	struct stat st;
 	int status;
+	char *no_dir;
 
-	if (stat(commands[0], &st) != 0)
+	no_dir = commands[0];
+	commands[0] = get_file_path(commands[0]);
+	free(no_dir);
+	if (commands[0] == NULL)
 		write(1, "No such file or directory\n", 26);
 	else
 	{       child = fork();
@@ -33,7 +37,7 @@ int runexe(char **commands)
 			return (1);             }
 		else if (child == 0)
 		{
-			get_file_path(commands[0]);
+			printf("commands[0]: %s\n", commands[0]);
 			execve(commands[0], commands, NULL);
 		}
 		else
@@ -76,7 +80,7 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 int main(int ac, char **av, char **env)
 {
 	int fb = 0, status;
-	ssize_t bufsize = 1024;
+	size_t bufsize = 1024;
 	char *buffer, **commands;
 	struct stat st;
 
@@ -92,12 +96,11 @@ int main(int ac, char **av, char **env)
 		fb = getline(&buffer, &bufsize, stdin);
 		if (fb == EOF)
 		{	write(1, "logout\n", 7);
-			free(buffer);
 			exit(0);		}
 		commands = sherlock(buffer, " ");
 		(*runcommand(commands, buffer))(commands, buffer);
+		free(buffer);
 		free_d_ptr(commands);
 	}
-	free(buffer);
 	return (0);
 }
