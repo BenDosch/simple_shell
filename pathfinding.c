@@ -26,7 +26,6 @@ char *get_file_path(char *filename)
 			else if (strcmp(dint->d_name, filename) == 0)
 			{
 				filename = dircat(paths[i], filename);
-				printf("file name after dircat: %s\n", filename);
 				if (filename == NULL)
 				{
 					printf("error could not concatonate\n");

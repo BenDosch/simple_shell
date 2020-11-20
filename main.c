@@ -37,7 +37,6 @@ int runexe(char **commands)
 			return (1);             }
 		else if (child == 0)
 		{
-			printf("commands[0]: %s\n", commands[0]);
 			execve(commands[0], commands, NULL);
 		}
 		else
@@ -85,18 +84,23 @@ int main(int ac, char **av, char **env)
 	struct stat st;
 
 	signal(SIGINT, sigintHandler);
-	buffer = (char *)malloc(bufsize * sizeof(char));
-	if (buffer == NULL)
-	{	write(1, "Error: No Memory\n", 17);
-		exit(1);	}
 	while (1)
 	{
+		buffer = (char *)malloc(bufsize * sizeof(char));
+		if (buffer == NULL)
+		{
+			write(1, "Error: No Memory\n", 17);
+			exit(1);
+		}
 		if (isatty(STDIN_FILENO))
 			write(1, "Sherlock$ ", 10);
 		fb = getline(&buffer, &bufsize, stdin);
 		if (fb == EOF)
-		{	write(1, "logout\n", 7);
-			exit(0);		}
+		{
+			write(1, "logout\n", 7);
+			free(buffer);
+			exit(0);
+		}
 		commands = sherlock(buffer, " ");
 		(*runcommand(commands, buffer))(commands, buffer);
 		free(buffer);

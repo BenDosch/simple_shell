@@ -18,11 +18,11 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * *dircat - Concatenates dir + / + file and changes the pointer of file to
- * the new location in memory after freeing what file pointed to.
+ * *dircat - Concatenates dir + / + file and retuns a pointer to its location
+ * in memory.
  * @dir: directory that contains file
  * @file: name of file
- * Return: 1 on sucess, 0 on fail.
+ * Return: pointer to new string on sucess, NULL on fail.
  */
 
 char *dircat(char *dir, char *file)
@@ -44,11 +44,6 @@ char *dircat(char *dir, char *file)
 		temp[i + j] = file[j];
 	}
 	temp[i + j] = '\0';
-	printf("filename: %s\n", file);
-	printf("dirname: %s\n", dir);
-	printf("temp: %s\n", temp);
-	file = temp;
-	printf("file now: %s\n", file);
 	return (temp);
 }
 
