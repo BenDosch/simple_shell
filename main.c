@@ -26,8 +26,11 @@ int runexe(char **commands)
 	char *no_dir;
 
 	no_dir = commands[0];
-	commands[0] = get_file_path(commands[0]);
-	free(no_dir);
+	if (stat(commands[0], &st) != 0)
+	{
+		commands[0] = get_file_path(commands[0]);
+		free(no_dir);
+	}
 	if (commands[0] == NULL)
 		write(1, "No such file or directory\n", 26);
 	else
@@ -47,6 +50,7 @@ int runexe(char **commands)
 /**
  *runcommand - takes the command lines and runs the appropriate function
  *@commands: command line
+ *@buffer: the buffer for commands, passed here to be freed if exit is used
  *Return: Either a function call or NULL
  */
 
@@ -101,10 +105,17 @@ int main(int ac, char **av, char **env)
 			free(buffer);
 			exit(0);
 		}
-		commands = sherlock(buffer, " ");
-		(*runcommand(commands, buffer))(commands, buffer);
-		free(buffer);
-		free_d_ptr(commands);
+		if (*buffer == '\n')
+		{
+			free(buffer);
+		}
+		else
+		{
+			commands = sherlock(buffer, " ");
+			(*runcommand(commands, buffer))(commands, buffer);
+			free(buffer);
+			free_d_ptr(commands);
+		}
 	}
 	return (0);
 }
