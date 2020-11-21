@@ -17,7 +17,7 @@ char *_getenv(const char *name)
 		{
 			if (name[j] == '\0' && __environ[i][j] == '=')
 				return (&(__environ[i][j + 1]));
-			else if(name[j] == __environ[i][j])
+			else if (name[j] == __environ[i][j])
 				continue;
 			else
 				break;
@@ -25,9 +25,3 @@ char *_getenv(const char *name)
 	}
 	return (NULL);
 }
-
-/* int main(int ac, char **av, char **env)
-{
-	printf("Pointer %p\n", _getenv(av[1]));
-	printf("Value: %s\n", _getenv(av[1]));
-	} */
