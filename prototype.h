@@ -2,7 +2,7 @@
 #define PROTOTYPE_H
 
 /**
- * struct builtin - struct for builtins
+ * struct bi - struct for builtins
  * @bi: Built in name
  * @f: The function associated
  */
@@ -24,8 +24,8 @@ typedef struct bi
 typedef struct hlist
 {
 	char *com;
-	hlist *next;
-	hlist *prev;
+	struct hlist *next;
+	struct hlist *prev;
 	int n;
 } hs_t;
 
