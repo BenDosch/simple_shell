@@ -7,10 +7,11 @@
  * @f: The function associated
  */
 
-typedef struct bi{
+typedef struct bi
+{
 	char *bi;
 	int (*f)(char **commands, char *buffer);
-}bi_t;
+} bi_t;
 
 /**
  *struct hlist - list for keeping track of command history
@@ -19,12 +20,14 @@ typedef struct bi{
  *@n: the number the node is in the list
  *@com: the command that was entered
  */
-typedef struct hlist{
+
+typedef struct hlist
+{
 	char *com;
 	hlist *next;
 	hlist *prev;
 	int n;
-}hs_t;
+} hs_t;
 
 int sl_exit(char **commands, char *buffer);
 int _strcmp(char *s1, char *s2);
@@ -36,7 +39,7 @@ char **sherlock(char *str, const char *delim);
 void free_d_ptr(char **ptr);
 int count_delim(char *str, const char *delim);
 void set_word(char *str, char **words, unsigned int word,
-	      unsigned int mark,unsigned int i);
+	      unsigned int mark, unsigned int i);
 int (*runcommand(char **commands, char *buffer))(char **, char *);
 char *_getenv(const char *name);
 char *get_file_path(char *filename);
