@@ -15,10 +15,10 @@ char *get_file_path(char *filename)
 
 	path = _getenv("PATH");
 	paths = sherlock(path, delim);
-	for(i = 0; paths[i] != NULL; i++)
+	for (i = 0; paths[i] != NULL; i++)
 	{
 		directory = opendir(paths[i]);
-		while((dint = readdir(directory)))
+		while ((dint = readdir(directory)))
 		{
 			if (_strcmp(dint->d_name, ".") == 0
 			    || _strcmp(dint->d_name, "..") == 0)
