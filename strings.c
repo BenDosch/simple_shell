@@ -30,9 +30,9 @@ char *dircat(char *dir, char *file)
 	size_t i, j;
 	char *temp;
 
-	temp = malloc(sizeof(char) * (_strlen(dir) +_strlen(file) + 2));
+	temp = malloc(sizeof(char) * (_strlen(dir) + _strlen(file) + 2));
 	if (temp == NULL)
-		   return (NULL);
+		return (NULL);
 	for (i = 0; dir[i] != '\0'; i++)
 	{
 		temp[i] = dir[i];
@@ -61,5 +61,5 @@ size_t _strlen(char *str)
 	{
 		i++;
 	}
-	return(i);
+	return (i);
 }
