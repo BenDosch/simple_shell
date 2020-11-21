@@ -12,6 +12,19 @@ typedef struct bi{
 	int (*f)(char **commands, char *buffer);
 }bi_t;
 
+/**
+ *struct hlist - list for keeping track of command history
+ *@next: next node in list
+ *@prev: previous node in list
+ *@n: the number the node is in the list
+ *@com: the command that was entered
+ */
+typedef struct hlist{
+	char *com;
+	hlist *next;
+	hlist *prev;
+	int n;
+}hs_t;
 
 int sl_exit(char **commands, char *buffer);
 int _strcmp(char *s1, char *s2);
