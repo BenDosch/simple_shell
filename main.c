@@ -61,7 +61,7 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 		{"env", sl_env},
 		{NULL, NULL}
 	};
-	int i, bic = 1;
+	int i, bic = 2;
 	int (*f)();
 
 	f = runexe;
@@ -106,6 +106,7 @@ int main(int ac, char **av, char **env)
 			free(buffer);
 			exit(0);
 		}
+		buffer = watson(buffer);
 		if (*buffer == '\n')
 		{
 			free(buffer);
