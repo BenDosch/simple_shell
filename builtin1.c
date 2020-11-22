@@ -29,9 +29,11 @@ int sl_exit(char **commands, char *buffer)
 
 int sl_env(char **commands, char *buffer)
 {
-	int i, j;
+	int i;
 	unsigned int varsize;
 
+	(void)commands;
+	(void)buffer;
 	for (i = 0; __environ[i]; i++)
 	{
 		if (i > 0)
@@ -42,10 +44,3 @@ int sl_env(char **commands, char *buffer)
 	write(1, "\n", 1);
 	return (1);
 }
-
-
-/* setenv built-in */
-
-/* unsetenv built-in */
-
-/* cd built-in */

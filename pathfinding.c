@@ -1,3 +1,5 @@
+#include "includes.h"
+
 /**
  * get_file_path - get directory from PATH if it contains a file
  * @filename: filename to check for full path
@@ -10,7 +12,7 @@ char *get_file_path(char *filename)
 	struct dirent *dint;
 	int i;
 	const char delim[] = ":";
-	char *path, *freefile;
+	char *path;
 	char **paths;
 
 	path = _getenv("PATH");
@@ -40,9 +42,4 @@ char *get_file_path(char *filename)
 	}
 	free_d_ptr(paths);
 	return (NULL);
-}
-
-char *gfp(char *filename)
-{
-
 }

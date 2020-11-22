@@ -8,8 +8,9 @@
 
 void sigintHandler(int sig_num)
 {
+	(void)sig_num;
 	signal(SIGINT, sigintHandler);
-	write(1, "\nSherlock$ ", 11);
+	write(1, "\n$ ", 3);
 }
 
 /**
@@ -44,6 +45,7 @@ int runexe(char **commands)
 		}
 		else
 			wait(&status);  }
+	(void)status;
 	return (0);
 }
 
@@ -64,6 +66,8 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 	int i, bic = 2;
 	int (*f)();
 
+	if(buffer == NULL)
+		buffer = " ";
 	f = runexe;
 	for (i = 0; i < bic; i++)
 	{
@@ -98,11 +102,11 @@ int main(int ac, char **av, char **env)
 			exit(1);
 		}
 		if (isatty(STDIN_FILENO))
-			write(1, "Sherlock$ ", 10);
+			write(1, "$ ", 2);
 		fb = getline(&buffer, &bufsize, stdin);
 		if (fb == EOF)
 		{
-			write(1, "logout\n", 7);
+			write(1, "\n", 1);
 			free(buffer);
 			exit(0);
 		}
@@ -119,5 +123,10 @@ int main(int ac, char **av, char **env)
 			free_d_ptr(commands);
 		}
 	}
+	(void)ac;
+	(void)av;
+	(void)env;
+	(void)status;
+	(void)st;
 	return (0);
 }
