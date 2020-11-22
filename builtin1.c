@@ -27,6 +27,7 @@ int sl_exit(char **commands, char *buffer)
  * @buffer:
  * Return:
  */
+
 int sl_env(char **commands, char *buffer)
 {
 	int i, j;
@@ -41,7 +42,6 @@ int sl_env(char **commands, char *buffer)
 	       	varsize = strlen(__environ[i]);
 		write(1, __environ[i], varsize);
 	}
-	free(buffer);
 	return (1);
 }
 
