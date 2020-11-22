@@ -156,5 +156,6 @@ char *watson(char *str)
 		strtea[j] = str[i];
 		j++;
 	}
+	free(str);
 	return (strtea);
 }
