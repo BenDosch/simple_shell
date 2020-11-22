@@ -40,7 +40,7 @@ int runexe(char **commands)
 			commands[0] = no_dir;
 		}
 		else
-			free(no_dir);
+		free(no_dir);
 	}
 	if (commands[0] == NULL)
 		write(1, "No such file or directory\n", 26);

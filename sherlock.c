@@ -31,6 +31,7 @@ char **sherlock(char *str, const char *delim)
 			}
 			if (delim[j] == '\0' || str[i] == '\0')
 			{
+
 				words[word] = malloc(sizeof(char) * (i - mark + 1));
 				if (words[word] == NULL)
 				{
