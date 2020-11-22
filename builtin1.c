@@ -20,12 +20,11 @@ int sl_exit(char **commands, char *buffer)
 	exit(0);
 }
 
-/* env built-in */
 /**
  * sl_env - prints current enviroment
- * @commands:
- * @buffer:
- * Return:
+ * @commands: array of commands
+ * @buffer: passed for freeing if exit
+ * Return: 1
  */
 
 int sl_env(char **commands, char *buffer)
@@ -33,15 +32,14 @@ int sl_env(char **commands, char *buffer)
 	int i, j;
 	unsigned int varsize;
 
-	printf("in function\n");
 	for (i = 0; __environ[i]; i++)
 	{
 		if (i > 0)
 			write(1, "\n", 1);
-		printf("in loop\n");
-	       	varsize = strlen(__environ[i]);
+		varsize = strlen(__environ[i]);
 		write(1, __environ[i], varsize);
 	}
+	write(1, "\n", 1);
 	return (1);
 }
 
