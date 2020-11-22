@@ -44,5 +44,6 @@ void set_word(char *str, char **words, unsigned int word,
 int (*runcommand(char **commands, char *buffer))(char **, char *);
 char *_getenv(const char *name);
 char *get_file_path(char *filename);
-
+char *gfp(char *filename);
+char *watson(char *str);
 #endif /* PROTOYPE_H */

@@ -15,6 +15,7 @@ char *get_file_path(char *filename)
 
 	path = _getenv("PATH");
 	paths = sherlock(path, delim);
+
 	for (i = 0; paths[i] != NULL; i++)
 	{
 		directory = opendir(paths[i]);
@@ -39,4 +40,9 @@ char *get_file_path(char *filename)
 	}
 	free_d_ptr(paths);
 	return (NULL);
+}
+
+char *gfp(char *filename)
+{
+
 }

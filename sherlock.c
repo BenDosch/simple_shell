@@ -126,3 +126,35 @@ void set_word(char *str, char **words, unsigned int word, unsigned int mark,
 			(words[word][k]) = str[mark + k];
 	}
 }
+
+/**
+ *watson - helper function for sherlock that trims excess spaces
+ *@str: the string being trimmed
+ *Return: the new string
+ */
+
+char *watson(char *str)
+{
+	int i, j = 0;
+	char *strtea;
+
+	strtea = malloc(sizeof(char) * _strlen(str));
+	if (strtea == NULL)
+	{
+		write(1, "Failed to malloc\n", 16);
+		return (NULL);
+	}
+
+	for (i = 0; str[i] == ' '; i++)
+	{}
+	for (; str[i] != '\0'; i++)
+	{
+		while (str[i] == ' ' && (str[i + 1] == ' '
+					 || str[i + 1] == '\0'
+					 || str[i + 1] == '\n'))
+			i++;
+		strtea[j] = str[i];
+		j++;
+	}
+	return (strtea);
+}
