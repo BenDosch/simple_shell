@@ -24,13 +24,23 @@ int runexe(char **commands)
 	pid_t child;
 	struct stat st;
 	int status;
-	char *no_dir;
+	char *no_dir = commands[0];
 
-	no_dir = commands[0];
-	if (stat(commands[0], &st) != 0)
+	if (commands[0][0] == '/')
+	{
+		if (stat(commands[0], &st) != 0)
+			write(1, "No such file or directory\n", 26);
+	}
+	else
 	{
 		commands[0] = get_file_path(commands[0]);
-		free(no_dir);
+		if (stat(no_dir, &st) == 0 && commands[0] == NULL)
+		{
+			free(commands[0]);
+			commands[0] = no_dir;
+		}
+		else
+			free(no_dir);
 	}
 	if (commands[0] == NULL)
 		write(1, "No such file or directory\n", 26);
@@ -45,6 +55,7 @@ int runexe(char **commands)
 		}
 		else
 			wait(&status);  }
+	(void)st;
 	(void)status;
 	return (0);
 }
@@ -66,7 +77,7 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 	int i, bic = 2;
 	int (*f)();
 
-	if(buffer == NULL)
+	if (buffer == NULL)
 		buffer = " ";
 	f = runexe;
 	for (i = 0; i < bic; i++)

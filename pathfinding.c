@@ -17,7 +17,6 @@ char *get_file_path(char *filename)
 
 	path = _getenv("PATH");
 	paths = sherlock(path, delim);
-
 	for (i = 0; paths[i] != NULL; i++)
 	{
 		directory = opendir(paths[i]);
@@ -31,7 +30,9 @@ char *get_file_path(char *filename)
 				filename = dircat(paths[i], filename);
 				if (filename == NULL)
 				{
-					printf("error could not concatonate\n");
+					write(1,
+					      "error could not concatonate\n",
+						28);
 				}
 				closedir(directory);
 				free_d_ptr(paths);
