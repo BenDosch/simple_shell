@@ -30,6 +30,7 @@ typedef struct hlist
 } hs_t;
 
 int sl_exit(char **commands, char *buffer);
+int sl_env(char **commands, char *buffer);
 int _strcmp(char *s1, char *s2);
 size_t _strlen(char *str);
 char *dircat(char *dir, char *file);

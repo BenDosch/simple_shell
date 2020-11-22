@@ -58,6 +58,7 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 {
 	bi_t bia[] = {
 		{"exit", sl_exit},
+		{"env", sl_env},
 		{NULL, NULL}
 	};
 	int i, bic = 1;
