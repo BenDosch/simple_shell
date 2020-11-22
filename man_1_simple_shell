@@ -1,0 +1,35 @@
+.TH "HSH" "1" "November 2020" "hsh 0.9.0" ""
+.SH NAME
+.PP
+hsh \- a simple shell program
+.SH SYNOPSIS
+.PP
+\f[B]hsh\f[]
+.SH DESCRIPTION
+.PP
+\f[B]hsh\f[] is a simple shell program capable of running commands from
+user input, meant to emulate the standard \f[B]sh\f[] shell.
+.SH OPTIONS
+.PP
+: currently does not run with any options
+.SH EXAMPLES
+.PP
+\f[B]hsh\f[] : Displays a command prompt for shell commands
+.SH COMMANDS
+.PP
+\f[B]exit\f[] : exits the shell with a status of 0
+.PP
+\f[B]env\f[] : prints the current working enviroment
+.PP
+\f[B]filename\f[] : runs the file name if it is an executable
+.SH EXIT VALUES
+.PP
+\f[B]0\f[] : Standard successful exit
+.PP
+\f[B]n\f[] : exit status of the shell based on exit n
+.SH BUGS
+.PP
+Current bugs include executables in current directory taking precident
+before shell functions
+.SH AUTHORS
+Ben Dosch, Selidex Parnell.
