@@ -27,7 +27,7 @@ int runexe(char **commands)
 
 	{
 		commands[0] = get_file_path(commands[0]);
-		if (access(no_dir, status) == 0 && commands[0] == NULL)
+		if (access(no_dir, X_OK) == 0 && commands[0] == NULL)
 		{
 			free(commands[0]);
 			commands[0] = no_dir;
@@ -110,10 +110,9 @@ void cnf(char *pn, char *cn, int i)
 
 int main(int ac, char **av, char **env)
 {
-	int fb = 0, status, i = 1;
+	int fb = 0, i = 1;
 	size_t bufsize = 1024;
 	char *buffer, **commands, *pn = av[0], *cn;
-	struct stat st;
 
 	signal(SIGINT, sigintHandler);
 	while (1)
@@ -127,7 +126,8 @@ int main(int ac, char **av, char **env)
 		if (fb == EOF)
 		{	free(buffer);
 			exit(0); }
-		buffer = watson(buffer);
+		if (isatty(STDIN_FILENO))
+			buffer = watson(buffer);
 		if (*buffer == '\n')
 			free(buffer);
 		else
@@ -145,7 +145,5 @@ int main(int ac, char **av, char **env)
 	}
 	(void)ac;
 	(void)env;
-	(void)status;
-	(void)st;
 	return (0);
 }
