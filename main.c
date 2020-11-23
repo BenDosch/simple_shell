@@ -22,13 +22,12 @@ void sigintHandler(int sig_num)
 int runexe(char **commands)
 {
 	pid_t child;
-	struct stat st;
 	int status;
 	char *no_dir = commands[0];
 
 	{
 		commands[0] = get_file_path(commands[0]);
-		if (stat(no_dir, &st) == 0 && commands[0] == NULL)
+		if (access(no_dir, status) == 0 && commands[0] == NULL)
 		{
 			free(commands[0]);
 			commands[0] = no_dir;
@@ -43,12 +42,10 @@ int runexe(char **commands)
 			return (1);             }
 		else if (child == 0)
 		{
-			execve(commands[0], commands, NULL);
+			execve(commands[0], commands, __environ);
 		}
 		else
 			wait(&status);  }
-	(void)st;
-	(void)status;
 	return (0);
 }
 
