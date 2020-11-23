@@ -64,17 +64,15 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 		{NULL, NULL}
 	};
 	int i, bic = 2;
-	int (*f)();
 
 	if (buffer == NULL)
 		buffer = " ";
-	f = runexe;
 	for (i = 0; i < bic; i++)
 	{
 		if (_strcmp(commands[0], bia[i].bi) == 0)
 			return (bia[i].f);
 	}
-	return (f);
+	return (NULL);
 }
 
 /**
@@ -112,35 +110,36 @@ int main(int ac, char **av, char **env)
 {
 	int fb = 0, i = 1;
 	size_t bufsize = 1024;
-	char *buffer, **commands, *pn = av[0], *cn;
+	char *buf, **coms, *pn = av[0], *cn;
 
 	signal(SIGINT, sigintHandler);
 	while (1)
 	{
-		buffer = (char *)malloc(bufsize * sizeof(char));
-		if (buffer == NULL)
+		buf = (char *)malloc(bufsize * sizeof(char));
+		if (buf == NULL)
 			exit(1);
 		if (isatty(STDIN_FILENO))
 			write(1, "$ ", 2);
-		fb = getline(&buffer, &bufsize, stdin);
+		fb = getline(&buf, &bufsize, stdin);
 		if (fb == EOF)
-		{	free(buffer);
+		{	free(buf);
 			exit(0); }
 		if (isatty(STDIN_FILENO))
-			buffer = watson(buffer);
-		if (*buffer == '\n')
-			free(buffer);
+			buf = watson(buf);
+		if (*buf == '\n')
+			free(buf);
 		else
-		{
-			commands = sherlock(buffer, " ");
-			cn = _strdup(commands[0]);
-			(*runcommand(commands, buffer))(commands, buffer);
-			if (commands[0] == NULL)
-				cnf(pn, cn, i);
-			free(cn);
-			free(buffer);
-			free_d_ptr(commands);
-		}
+		{	coms = sherlock(buf, " ");
+			if (checkbuiltins(coms[0]) == 1)
+				(*runcommand(coms, buf))(coms, buf);
+			else
+			{	cn = _strdup(coms[0]);
+				runexe(coms);
+				if (coms[0] == NULL)
+					cnf(pn, cn, i);
+				free(cn); }
+			free(buf);
+			free_d_ptr(coms); }
 		i++;
 	}
 	(void)ac;

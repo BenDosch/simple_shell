@@ -61,5 +61,6 @@ char *watson(char *str);
 int _atoi(char *str);
 char *_itoa(char *stri, int i);
 char *_strdup(char *str);
+int checkbuiltins(char *str);
 
 #endif /* INCLUDES_H */

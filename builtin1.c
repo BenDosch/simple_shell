@@ -52,3 +52,18 @@ int sl_env(char **commands, char *buffer)
 	write(1, "\n", 1);
 	return (1);
 }
+
+/**
+ *checkbuiltins - checks to see if is built in command
+ *@str: command being checked
+ *Return: 1 if builtin, 0 if not
+ */
+
+int checkbuiltins(char *str)
+{
+	if (_strcmp("exit", str) == 0)
+		return (1);
+	if (_strcmp("env", str) == 0)
+		return (1);
+	return (0);
+}
