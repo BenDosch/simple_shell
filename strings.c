@@ -65,3 +65,54 @@ size_t _strlen(char *str)
 	}
 	return (i);
 }
+
+
+/**
+ *_atoi - converts string to int
+ *@str: string being converted
+ *Return: -1 if illegal number, else the converted int
+ */
+
+int _atoi(char *str)
+{
+	int i, n = 0;
+
+	if (str == NULL)
+		return (-1);
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (-1);
+		n = (n * 10) + (str[i] - '0');
+	}
+	return (n);
+}
+
+
+/**
+ *_itoa - converts int to string
+ *@i: int being converted
+ *Return: a string
+ */
+
+void _itoa(char *stri, int i)
+{
+	int j, n;
+
+	n = i;
+	for (j = 1; (n / 10) != 0; j++)
+		n = n / 10;
+
+	stri = malloc(sizeof(char) * (j + 1));
+	if (stri == NULL)
+		return;
+
+	stri[j] = '\0';
+	j--;
+	for (; j >= 0; j--)
+	{
+		stri[j] = i % 10;
+		i = i / 10;
+	}
+	printf("stri = %s\n", stri);
+}

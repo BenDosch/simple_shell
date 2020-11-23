@@ -40,7 +40,7 @@ int runexe(char **commands)
 			commands[0] = no_dir;
 		}
 		else
-		free(no_dir);
+			free(no_dir);
 	}
 	if (commands[0] == NULL)
 		write(1, "No such file or directory\n", 26);
@@ -89,6 +89,28 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 }
 
 /**
+ *cnf - prints error message if command not found
+ *@pn: program name (av[0])
+ *@cn: command name (commands[0])
+ *@i: command number
+ *Return: void no return
+ */
+
+void cnf(char *pn, char *cn, int i)
+{
+
+	char *stri;
+
+	_itoa(stri, i);
+	write(1, &pn, _strlen(pn));
+	write(1, ": ", 2);
+	write(1, &stri, _strlen(stri));
+	write(1, ": ", 2);
+	write(1, &cn, _strlen(cn));
+	free(stri);
+}
+
+/**
  *main - entry point for the shell Sherlock
  *@ac: number of arguments
  *@av: array of arguments
@@ -98,7 +120,7 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 
 int main(int ac, char **av, char **env)
 {
-	int fb = 0, status;
+	int fb = 0, status, i = 1;
 	size_t bufsize = 1024;
 	char *buffer, **commands;
 	struct stat st;
@@ -108,24 +130,18 @@ int main(int ac, char **av, char **env)
 	{
 		buffer = (char *)malloc(bufsize * sizeof(char));
 		if (buffer == NULL)
-		{
-			write(1, "Error: No Memory\n", 17);
 			exit(1);
-		}
 		if (isatty(STDIN_FILENO))
 			write(1, "$ ", 2);
 		fb = getline(&buffer, &bufsize, stdin);
 		if (fb == EOF)
-		{
-			write(1, "\n", 1);
-			free(buffer);
-			exit(0);
-		}
+		{	free(buffer);
+			exit(0); }
 		buffer = watson(buffer);
 		if (*buffer == '\n')
 		{
 			free(buffer);
-		}
+			}
 		else
 		{
 			commands = sherlock(buffer, " ");
@@ -133,11 +149,12 @@ int main(int ac, char **av, char **env)
 			free(buffer);
 			free_d_ptr(commands);
 		}
+		i++;
 	}
 	(void)ac;
-	(void)av;
 	(void)env;
 	(void)status;
 	(void)st;
+	(void)av;
 	return (0);
 }

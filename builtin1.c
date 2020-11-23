@@ -10,12 +10,20 @@
 
 int sl_exit(char **commands, char *buffer)
 {
-	free(buffer);
 	if (commands[1])
 	{
+		int i = _atoi(commands[1]);
+
+		if (i == -1)
+		{
+			write(1, "Illegal number\n", 15);
+			return (1);
+		}
+		free(buffer);
 		free_d_ptr(commands);
-		exit(1);
+		exit(i);
 	}
+	free(buffer);
 	free_d_ptr(commands);
 	exit(0);
 }
@@ -38,7 +46,7 @@ int sl_env(char **commands, char *buffer)
 	{
 		if (i > 0)
 			write(1, "\n", 1);
-		varsize = strlen(__environ[i]);
+		varsize = _strlen(__environ[i]);
 		write(1, __environ[i], varsize);
 	}
 	write(1, "\n", 1);
