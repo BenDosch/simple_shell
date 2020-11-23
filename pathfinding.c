@@ -29,7 +29,7 @@ char *get_file_path(char *filename)
 			if (_strcmp(dint->d_name, ".") == 0
 			    || _strcmp(dint->d_name, "..") == 0)
 				continue;
-			else if (_strcmp(dint->d_name, filename) == 0)
+			else if (strcmp(dint->d_name, filename) == 0)
 			{
 
 				filename = dircat(paths[i], filename);
