@@ -36,9 +36,7 @@ int runexe(char **commands)
 		else
 			free(no_dir);
 	}
-	if (commands[0] == NULL)
-	{}
-	else
+	if (commands[0] != NULL)
 	{       child = fork();
 		if (child == -1)
 		{       write(1, "Fork Failed\n", 12);
@@ -96,12 +94,12 @@ void cnf(char *pn, char *cn, int i)
 	char *stri = "nil";
 
 	stri = _itoa(stri, i);
-	write(1, pn, _strlen(pn));
-	write(1, ": ", 2);
-	write(1, stri, _strlen(stri));
-	write(1, ": ", 2);
-	write(1, cn, _strlen(cn));
-	write(1, ": not found\n", 12);
+	write(STDERR_FILENO, pn, _strlen(pn));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, stri, _strlen(stri));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, cn, _strlen(cn));
+	write(STDERR_FILENO, ": not found\n", 12);
 	free(stri);
 }
 
@@ -134,9 +132,7 @@ int main(int ac, char **av, char **env)
 			exit(0); }
 		buffer = watson(buffer);
 		if (*buffer == '\n')
-		{
 			free(buffer);
-			}
 		else
 		{
 			commands = sherlock(buffer, " ");
