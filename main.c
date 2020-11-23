@@ -26,12 +26,6 @@ int runexe(char **commands)
 	int status;
 	char *no_dir = commands[0];
 
-	if (commands[0][0] == '/')
-	{
-		if (stat(commands[0], &st) != 0)
-			write(1, "No such file or directory\n", 26);
-	}
-	else
 	{
 		commands[0] = get_file_path(commands[0]);
 		if (stat(no_dir, &st) == 0 && commands[0] == NULL)
@@ -43,7 +37,7 @@ int runexe(char **commands)
 			free(no_dir);
 	}
 	if (commands[0] == NULL)
-		write(1, "No such file or directory\n", 26);
+	{}
 	else
 	{       child = fork();
 		if (child == -1)
@@ -99,14 +93,15 @@ int (*runcommand(char **commands, char *buffer))(char **, char *)
 void cnf(char *pn, char *cn, int i)
 {
 
-	char *stri;
+	char *stri = "nil";
 
-	_itoa(stri, i);
-	write(1, &pn, _strlen(pn));
+	stri = _itoa(stri, i);
+	write(1, pn, _strlen(pn));
 	write(1, ": ", 2);
-	write(1, &stri, _strlen(stri));
+	write(1, stri, _strlen(stri));
 	write(1, ": ", 2);
-	write(1, &cn, _strlen(cn));
+	write(1, cn, _strlen(cn));
+	write(1, ": not found\n", 12);
 	free(stri);
 }
 
@@ -122,7 +117,7 @@ int main(int ac, char **av, char **env)
 {
 	int fb = 0, status, i = 1;
 	size_t bufsize = 1024;
-	char *buffer, **commands;
+	char *buffer, **commands, *pn = av[0], *cn;
 	struct stat st;
 
 	signal(SIGINT, sigintHandler);
@@ -145,7 +140,11 @@ int main(int ac, char **av, char **env)
 		else
 		{
 			commands = sherlock(buffer, " ");
+			cn = _strdup(commands[0]);
 			(*runcommand(commands, buffer))(commands, buffer);
+			if (commands[0] == NULL)
+				cnf(pn, cn, i);
+			free(cn);
 			free(buffer);
 			free_d_ptr(commands);
 		}
@@ -155,6 +154,5 @@ int main(int ac, char **av, char **env)
 	(void)env;
 	(void)status;
 	(void)st;
-	(void)av;
 	return (0);
 }

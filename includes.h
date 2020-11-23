@@ -59,6 +59,7 @@ char *_getenv(const char *name);
 char *get_file_path(char *filename);
 char *watson(char *str);
 int _atoi(char *str);
-void _itoa(char *stri, int i);
+char *_itoa(char *stri, int i);
+char *_strdup(char *str);
 
 #endif /* INCLUDES_H */

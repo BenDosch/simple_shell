@@ -91,11 +91,12 @@ int _atoi(char *str)
 
 /**
  *_itoa - converts int to string
+ *@stri: a string
  *@i: int being converted
  *Return: a string
  */
 
-void _itoa(char *stri, int i)
+char *_itoa(char *stri, int i)
 {
 	int j, n;
 
@@ -105,14 +106,14 @@ void _itoa(char *stri, int i)
 
 	stri = malloc(sizeof(char) * (j + 1));
 	if (stri == NULL)
-		return;
+		return (NULL);
 
 	stri[j] = '\0';
 	j--;
 	for (; j >= 0; j--)
 	{
-		stri[j] = i % 10;
+		stri[j] = (i % 10) + '0';
 		i = i / 10;
 	}
-	printf("stri = %s\n", stri);
+	return (stri);
 }
