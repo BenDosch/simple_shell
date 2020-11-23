@@ -26,10 +26,7 @@ char *get_file_path(char *filename)
 			return (NULL);
 		while ((dint = readdir(directory)))
 		{
-			if (_strcmp(dint->d_name, ".") == 0
-			    || _strcmp(dint->d_name, "..") == 0)
-				continue;
-			else if (_strcmp(dint->d_name, filename) == 0)
+			if (_strcmp(dint->d_name, filename) == 0)
 			{
 
 				filename = dircat(paths[i], filename);
