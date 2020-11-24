@@ -25,16 +25,8 @@ int runexe(char **commands)
 	int status;
 	char *no_dir = commands[0];
 
-	{
+	if (access(no_dir, X_OK) != 0)
 		commands[0] = get_file_path(commands[0]);
-		if (access(no_dir, X_OK) == 0 && commands[0] == NULL)
-		{
-			free(commands[0]);
-			commands[0] = no_dir;
-		}
-		else
-			free(no_dir);
-	}
 	if (commands[0] != NULL)
 	{       child = fork();
 		if (child == -1)
