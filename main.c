@@ -136,7 +136,8 @@ int main(int ac, char **av, char **env)
 			{	cn = _strdup(coms[0]);
 				runexe(coms);
 				if (coms[0] == NULL)
-					cnf(pn, cn, i);
+				{	write(STDOUT_FILENO, "No such file or directory", 25)
+						/*cnf(pn, cn, i);*/}
 				free(cn); }
 			free(buf);
 			free_d_ptr(coms); }
